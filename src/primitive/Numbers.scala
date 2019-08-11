@@ -6,6 +6,9 @@
 
 object Numbers {
 
+  /**
+   * Machine Epsilon: https://en.wikipedia.org/wiki/Machine_epsilon
+   */
   def EPS = 1e-5
 
   /**
