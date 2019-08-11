@@ -11,6 +11,12 @@ object Strings {
    *
    * Time - O(n)
    * Space - O(1)
+   * Tail recursive: A call is said to be in tail position 
+   * if the caller does nothing other than return the value of the recursive call.
+   * 
+   * Applications: 
+   *   https://leetcode.com/problems/valid-palindrome-ii/submissions/
+   *   https://leetcode.com/problems/valid-palindrome/submissions/
    */
   def isPalindrome(s: String): Boolean = {
     def loop(i: Int, j: Int): Boolean =
