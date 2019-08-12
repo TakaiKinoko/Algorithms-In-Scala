@@ -25,15 +25,19 @@ object Strings {
       else false
 
     loop(0, s.length - 1)
-  }
+  }      
 
   /**
    * Searches for the longest palindrome in given string 's'.
    *
    * http://www.geeksforgeeks.org/dynamic-programming-set-12-longest-palindromic-subsequence/
-   *
+   * NOTE: this is sequence, not substring
+   * 
    * Time - O(n^2)
    * Space - O(n)
+   * 
+   * Applications:
+   *  https://leetcode.com/problems/longest-palindromic-subsequence/
    */
   def longestPalindrome(s: String): String = {
     def check(i: Int, j: Int): Boolean = 
@@ -55,6 +59,31 @@ object Strings {
     else search(1, 1, 1, 1)
   }
 
+  /**
+   * Searches for the longest palindrome subsequence in given string 's' with memoization.
+   * 
+   * Applications:
+   *  https://leetcode.com/problems/longest-palindromic-subsequence/
+   */
+  def longestPalindromeSubseq(s: String): Int = {
+    val len = s.length
+    import collection.mutable.Map
+    val memo: Map[(Int, Int), Int] = Map().withDefaultValue(-1)
+    def helper(l: Int, r: Int): Int = {
+      if(l > r) return 0
+      if(l == r) return 1
+      if(memo((l, r)) >= 0) return memo((l, r))
+      if(s(l) == s(r)) {
+        memo((l, r)) = 2 + helper(l + 1, r - 1)
+        memo((l, r))
+      }
+      else {
+        memo((l, r)) = Math.max(helper(l + 1, r), helper(l, r - 1))
+        memo((l, r))
+      }
+    }
+    helper(0, len - 1)
+  }
   /**
    * Returns the longest common substring of two strings 'a' and 'b'.
    * 
